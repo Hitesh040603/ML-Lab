@@ -1,0 +1,30 @@
+#Binary Value
+val=['Partner','Dependents','PhoneService','PaperlessBilling','Churn',
+     ]
+for i in val:
+    df[i]=df[i].map({'Yes':1,'No':0})
+
+
+
+#remove empty spaces and change to numeric
+index=[]
+for i in range(0,7043):
+    if df['TotalCharges'][i].isspace():
+        index.append(i)
+df=df.drop(index,axis=0)
+df['TotalCharges'] = pd.to_numeric(df['TotalCharges'])
+
+
+
+#seperate x and y
+y=df.iloc[:,-1]
+x=df.iloc[:,:-1]
+
+
+
+#get dummies
+temp=pd.get_dummies(x['InternetService'],dtype='int')
+x=x.join(temp,how = 'left', rsuffix = 'InternetService')
+
+
+
