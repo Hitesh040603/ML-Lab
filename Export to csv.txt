@@ -1,0 +1,7 @@
+
+#customer id to test data
+test_df=pd.DataFrame(X_test, columns=X.columns)
+test_df['customer_id']=customer_ids.iloc[X_test.index]
+
+#export to csv
+test_df.to_csv('test_data_with_customer_id.csv',index=False)
